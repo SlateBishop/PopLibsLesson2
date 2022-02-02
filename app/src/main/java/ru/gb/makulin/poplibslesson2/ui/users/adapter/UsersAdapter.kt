@@ -18,7 +18,7 @@ class UsersAdapter(
         )
         return UserViewHolder(binding).apply {
             itemView.setOnClickListener {
-                presenter.itemClickListener()
+                presenter.itemClickListener(this)
             }
         }
     }
@@ -41,6 +41,10 @@ class UsersAdapter(
 
         override fun setLogin(login: String) {
             binding.textViewLogin.text = login
+        }
+
+        override fun getLogin(): String {
+            return binding.textViewLogin.text.toString()
         }
 
         override var pos = -1

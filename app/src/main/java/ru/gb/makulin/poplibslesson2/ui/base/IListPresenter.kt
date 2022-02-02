@@ -2,7 +2,7 @@ package ru.gb.makulin.poplibslesson2.ui.base
 
 interface IListPresenter<V : IItemView> {
 
-    var itemClickListener: () -> Unit
+    var itemClickListener: (V) -> Unit
 
     fun getCount(): Int
 
