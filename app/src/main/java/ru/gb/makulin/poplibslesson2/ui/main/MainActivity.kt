@@ -5,6 +5,7 @@ import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
 import ru.gb.makulin.poplibslesson2.R
+import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
 
 class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
 
@@ -24,4 +25,12 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
         App.instance.navigatorHolder.removeNavigator()
     }
 
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.forEach {
+            if (it is BackButtonListener && it.backPressed()) {
+                return
+            }
+        }
+        presenter.backPressed()
+    }
 }

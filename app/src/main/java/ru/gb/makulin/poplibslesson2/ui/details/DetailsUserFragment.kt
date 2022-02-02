@@ -8,9 +8,10 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
 import ru.gb.makulin.poplibslesson2.databinding.FragmentDetailsUserBinding
+import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
 import ru.gb.makulin.poplibslesson2.utils.USER_DETAILS_LOGIN_SAVE_KEY
 
-class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView {
+class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         DetailsUserPresenter(App.instance.router)
@@ -49,5 +50,8 @@ class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView {
         _binding = null
     }
 
-
+    override fun backPressed(): Boolean {
+        presenter.backPressed()
+        return true
+    }
 }

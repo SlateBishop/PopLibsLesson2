@@ -28,6 +28,10 @@ class UsersPresenter(
         viewState.updateList()
     }
 
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
 
     class UsersListPresenter : IListPresenter<UserItemView> {
 
