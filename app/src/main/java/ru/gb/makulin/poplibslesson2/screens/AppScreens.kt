@@ -1,6 +1,7 @@
 package ru.gb.makulin.poplibslesson2.screens
 
 import com.github.terrakok.cicerone.androidx.FragmentScreen
+import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.ui.details.DetailsUserFragment
 import ru.gb.makulin.poplibslesson2.ui.users.UsersFragment
 
@@ -10,7 +11,7 @@ object AppScreens {
         UsersFragment.newInstance()
     }
 
-    fun detailsUserScreen(login: String) = FragmentScreen {
-        DetailsUserFragment.newInstance(login)
+    fun detailsUserScreen(user: GithubUserModel) = FragmentScreen {
+        DetailsUserFragment.newInstance(user)
     }
 }

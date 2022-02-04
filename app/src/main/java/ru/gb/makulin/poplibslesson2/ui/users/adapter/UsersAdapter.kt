@@ -2,51 +2,46 @@ package ru.gb.makulin.poplibslesson2.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.makulin.poplibslesson2.databinding.FragmentUsersItemBinding
-import ru.gb.makulin.poplibslesson2.ui.users.UserItemView
-import ru.gb.makulin.poplibslesson2.ui.users.UsersPresenter
+import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 
 class UsersAdapter(
-    private val presenter: UsersPresenter.UsersListPresenter
-) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private val itemClickListener: (GithubUserModel) -> Unit
+) : ListAdapter<GithubUserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = FragmentUsersItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false
         )
-        return UserViewHolder(binding).apply {
-            itemView.setOnClickListener {
-                presenter.itemClickListener(this)
-            }
-        }
+        return UserViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        presenter.bindView(
-            holder.apply {
-                pos = position
-            }
-        )
+        holder.showUser(currentList[position])
     }
-
-    override fun getItemCount(): Int {
-        return presenter.getCount()
-    }
-
 
     inner class UserViewHolder(private val binding: FragmentUsersItemBinding) : RecyclerView
-    .ViewHolder(binding.root), UserItemView {
+    .ViewHolder(binding.root) {
 
-        override fun setLogin(login: String) {
-            binding.textViewLogin.text = login
+        fun showUser(user: GithubUserModel) {
+            binding.root.setOnClickListener {
+                itemClickListener(user)
+            }
+            binding.textViewLogin.text = user.login
         }
+    }
+}
 
-        override fun getLogin(): String {
-            return binding.textViewLogin.text.toString()
-        }
+object GithubUserItemCallback : DiffUtil.ItemCallback<GithubUserModel>() {
+    override fun areItemsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
+        return oldItem == newItem
+    }
 
-        override var pos = -1
+    override fun areContentsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
+        return oldItem == newItem
     }
 }
