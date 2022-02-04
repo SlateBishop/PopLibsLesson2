@@ -8,8 +8,9 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
 import ru.gb.makulin.poplibslesson2.databinding.FragmentDetailsUserBinding
+import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
-import ru.gb.makulin.poplibslesson2.utils.USER_DETAILS_LOGIN_SAVE_KEY
+import ru.gb.makulin.poplibslesson2.utils.USER_DETAILS_USER_SAVE_KEY
 
 class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonListener {
 
@@ -22,10 +23,10 @@ class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonL
         get() = _binding!!
 
     companion object {
-        fun newInstance(login: String): DetailsUserFragment {
+        fun newInstance(user: GithubUserModel): DetailsUserFragment {
             val fragment = DetailsUserFragment()
             val bundle = Bundle()
-            bundle.putString(USER_DETAILS_LOGIN_SAVE_KEY, login)
+            bundle.putParcelable(USER_DETAILS_USER_SAVE_KEY, user)
             fragment.arguments = bundle
             return fragment
         }
@@ -42,7 +43,8 @@ class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textViewLogin.text = arguments?.getString(USER_DETAILS_LOGIN_SAVE_KEY)
+        val user = arguments?.getParcelable<GithubUserModel>(USER_DETAILS_USER_SAVE_KEY)
+        binding.textViewLogin.text = user?.login
     }
 
     override fun onDestroy() {

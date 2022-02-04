@@ -9,6 +9,7 @@ import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
 import ru.gb.makulin.poplibslesson2.databinding.FragmentUsersBinding
 import ru.gb.makulin.poplibslesson2.domain.GithubUsersRepository
+import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
 import ru.gb.makulin.poplibslesson2.ui.users.adapter.UsersAdapter
 
@@ -19,7 +20,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     private val adapter by lazy {
-        UsersAdapter(presenter.usersListPresenter)
+        UsersAdapter(presenter::onUserClicked)
     }
 
     private var _binding: FragmentUsersBinding? = null
@@ -52,8 +53,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
 
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
+    override fun updateList(users: List<GithubUserModel>) {
+        adapter.submitList(users)
     }
 
     override fun backPressed(): Boolean {
