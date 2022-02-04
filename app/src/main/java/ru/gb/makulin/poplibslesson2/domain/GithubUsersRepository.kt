@@ -1,5 +1,6 @@
 package ru.gb.makulin.poplibslesson2.domain
 
+import io.reactivex.rxjava3.core.Observable
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 
 class GithubUsersRepository {
@@ -14,5 +15,5 @@ class GithubUsersRepository {
         GithubUserModel("user7")
     )
 
-    fun getUsers(): List<GithubUserModel> = users
+    fun getUsers(): Observable<List<GithubUserModel>> = Observable.just(users)
 }

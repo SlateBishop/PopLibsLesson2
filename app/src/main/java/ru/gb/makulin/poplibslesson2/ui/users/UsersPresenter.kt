@@ -17,8 +17,10 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        val users = usersRepository.getUsers()
-        viewState.updateList(users)
+        usersRepository.getUsers().subscribe {
+            viewState.updateList(it)
+        }
+
     }
 
     fun onUserClicked(user: GithubUserModel) {
