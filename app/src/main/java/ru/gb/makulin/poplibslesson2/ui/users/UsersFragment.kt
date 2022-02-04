@@ -55,6 +55,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     override fun updateList(users: List<GithubUserModel>) {
         adapter.submitList(users)
+        adapter.notifyItemChanged(users.size - 1)
     }
 
     override fun backPressed(): Boolean {

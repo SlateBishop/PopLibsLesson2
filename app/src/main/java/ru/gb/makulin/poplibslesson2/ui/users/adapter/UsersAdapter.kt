@@ -38,12 +38,10 @@ class UsersAdapter(
 
 object GithubUserItemCallback : DiffUtil.ItemCallback<GithubUserModel>() {
     override fun areItemsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
-//        return oldItem == newItem
-        return false
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
-//        return oldItem == newItem
-        return false
+        return oldItem == newItem
     }
 }
