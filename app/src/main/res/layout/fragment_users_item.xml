@@ -2,10 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/users_item_height"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/user_item_margin"
     android:foreground="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewAvatar"
+        android:layout_width="@dimen/user_item_avatar_image_size"
+        android:layout_height="@dimen/user_item_avatar_image_size" />
 
     <TextView
         android:id="@+id/textViewLogin"

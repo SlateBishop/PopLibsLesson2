@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import ru.gb.makulin.poplibslesson2.databinding.FragmentUsersItemBinding
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 
@@ -28,10 +29,14 @@ class UsersAdapter(
     .ViewHolder(binding.root) {
 
         fun showUser(user: GithubUserModel) {
-            binding.root.setOnClickListener {
-                itemClickListener(user)
+            with(binding) {
+                root.setOnClickListener {
+                    itemClickListener(user)
+                }
+                textViewLogin.text = user.login
+                imageViewAvatar.load(user.avatarUrl)
             }
-            binding.textViewLogin.text = user.login
+
         }
     }
 }
