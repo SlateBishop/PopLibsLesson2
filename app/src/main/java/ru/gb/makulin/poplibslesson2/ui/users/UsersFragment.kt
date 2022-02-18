@@ -8,7 +8,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
 import ru.gb.makulin.poplibslesson2.databinding.FragmentUsersBinding
-import ru.gb.makulin.poplibslesson2.domain.GithubUsersRepository
+import ru.gb.makulin.poplibslesson2.domain.users.GithubUsersRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.network.ApiHolder
 import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener

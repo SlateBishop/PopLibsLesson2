@@ -3,6 +3,7 @@
     <dimen name="users_item_height">50dp</dimen>
     <dimen name="user_item_text_margin_start">5dp</dimen>
     <dimen name="user_item_margin">10dp</dimen>
+    <dimen name="repos_item_margin">10dp</dimen>
     <dimen name="details_user_padding">16dp</dimen>
     <dimen name="user_item_avatar_image_size">50dp</dimen>
 </resources>
