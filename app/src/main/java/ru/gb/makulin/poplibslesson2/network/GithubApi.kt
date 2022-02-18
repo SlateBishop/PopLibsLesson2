@@ -14,6 +14,6 @@ interface GithubApi {
 
     @GET(GITHUB_API_URL_END_POINT_USER_REPOSITORIES)
     fun getUserRepos(
-        @Path(GITHUB_API_URL_PATH_USER_REPOSITORIES) userName: String //FIXME if need
+        @Path(GITHUB_API_URL_PATH_USER_REPOSITORIES) userName: String
     ): Single<List<GithubUserReposDTO>>
 }

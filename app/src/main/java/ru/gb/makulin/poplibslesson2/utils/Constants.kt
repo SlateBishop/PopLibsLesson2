@@ -1,6 +1,6 @@
 package ru.gb.makulin.poplibslesson2.utils
 
-const val USER_DETAILS_USER_SAVE_KEY = "user details"
+const val REPO_SAVE_KEY = "repo model"
 const val USER_SAVE_KEY = "user model"
 const val GITHUB_API_BASE_URL = "https://api.github.com"
 const val GITHUB_API_URL_END_POINT_USERS = "/users"

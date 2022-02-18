@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
 import ru.gb.makulin.poplibslesson2.databinding.FragmentDetailsUserBinding
-import ru.gb.makulin.poplibslesson2.model.GithubUserModel
+import ru.gb.makulin.poplibslesson2.model.GithubUserReposModel
 import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
-import ru.gb.makulin.poplibslesson2.utils.USER_DETAILS_USER_SAVE_KEY
+import ru.gb.makulin.poplibslesson2.utils.REPO_SAVE_KEY
 
-class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonListener {
+class DetailsRepoFragment : MvpAppCompatFragment(), DetailsRepoView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        DetailsUserPresenter(App.instance.router)
+        DetailsRepoPresenter(App.instance.router)
     }
 
     private var _binding: FragmentDetailsUserBinding? = null
@@ -23,13 +24,15 @@ class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonL
         get() = _binding!!
 
     companion object {
-        fun newInstance(user: GithubUserModel): DetailsUserFragment {
-            val fragment = DetailsUserFragment()
-            val bundle = Bundle()
-            bundle.putParcelable(USER_DETAILS_USER_SAVE_KEY, user)
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(repo: GithubUserReposModel): DetailsRepoFragment {
+            return DetailsRepoFragment().apply {
+                arguments = bundleOf(REPO_SAVE_KEY to repo)
+            }
         }
+    }
+
+    private val repoModel by lazy {
+        requireArguments().getParcelable<GithubUserReposModel>(REPO_SAVE_KEY)!!
     }
 
     override fun onCreateView(
@@ -43,8 +46,7 @@ class DetailsUserFragment : MvpAppCompatFragment(), DetailsUserView, BackButtonL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val user = arguments?.getParcelable<GithubUserModel>(USER_DETAILS_USER_SAVE_KEY)
-        binding.textViewLogin.text = user?.login
+        binding.textViewFullName.text = repoModel.fullName
     }
 
     override fun onDestroy() {

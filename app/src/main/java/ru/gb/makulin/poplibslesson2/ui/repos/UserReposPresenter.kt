@@ -7,6 +7,7 @@ import moxy.MvpPresenter
 import ru.gb.makulin.poplibslesson2.domain.repos.IGithubReposRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.model.GithubUserReposModel
+import ru.gb.makulin.poplibslesson2.screens.AppScreens
 import ru.gb.makulin.poplibslesson2.utils.convertGithubUserReposFromDtoToModel
 
 
@@ -31,7 +32,7 @@ class UserReposPresenter(
     }
 
     fun onRepoClicked(repo: GithubUserReposModel) {
-//        router.navigateTo(AppScreens.detailsUserScreen(repo))
+        router.navigateTo(AppScreens.detailsUserScreen(repo))
     }
 
     fun backPressed(): Boolean {
