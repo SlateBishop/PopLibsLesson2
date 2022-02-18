@@ -1,49 +1,41 @@
 package ru.gb.makulin.poplibslesson2.ui.users
 
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import ru.gb.makulin.poplibslesson2.domain.GithubUsersRepository
+import ru.gb.makulin.poplibslesson2.domain.users.GithubUsersRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.screens.AppScreens
-import ru.gb.makulin.poplibslesson2.ui.base.IListPresenter
+import ru.gb.makulin.poplibslesson2.utils.convertGithubUsersFromDtoToModel
+
 
 class UsersPresenter(
     private val router: Router,
     private val usersRepository: GithubUsersRepository
 ) : MvpPresenter<UsersView>() {
 
-    val usersListPresenter = UsersListPresenter()
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadData()
-        usersListPresenter.itemClickListener = {
-            router.navigateTo(AppScreens.detailsUserScreen(it.getLogin()))
-        }
     }
 
     private fun loadData() {
-        val users = usersRepository.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+        usersRepository.getUsers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { users ->
+                viewState.updateList(convertGithubUsersFromDtoToModel(users))
+            }
+    }
+
+
+    fun onUserClicked(user: GithubUserModel) {
+        router.navigateTo(AppScreens.reposScreen(user))
     }
 
     fun backPressed(): Boolean {
         router.exit()
         return true
-    }
-
-    class UsersListPresenter : IListPresenter<UserItemView> {
-
-        val users = mutableListOf<GithubUserModel>()
-
-        override var itemClickListener: (UserItemView) -> Unit = {}
-
-        override fun getCount(): Int = users.size
-
-        override fun bindView(view: UserItemView) {
-            val user = users[view.pos]
-            view.setLogin(user.login)
-        }
     }
 }

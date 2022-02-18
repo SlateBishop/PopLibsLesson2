@@ -3,9 +3,9 @@ package ru.gb.makulin.poplibslesson2.ui.details
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
-class DetailsUserPresenter(
+class DetailsRepoPresenter(
     private val router: Router
-) : MvpPresenter<DetailsUserView>() {
+) : MvpPresenter<DetailsRepoView>() {
 
     fun backPressed(): Boolean {
         router.exit()
