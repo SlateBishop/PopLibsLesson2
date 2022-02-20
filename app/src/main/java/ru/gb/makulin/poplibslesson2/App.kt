@@ -3,6 +3,7 @@ package ru.gb.makulin.poplibslesson2
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import ru.gb.makulin.poplibslesson2.database.GithubDatabase
 
 class App : Application() {
 
@@ -16,6 +17,10 @@ class App : Application() {
     val router
         get() = cicerone.router
 
+    val database by lazy {
+        GithubDatabase.getInstance(this)
+    }
+
     companion object {
         private var _instance: App? = null
         val instance
@@ -26,5 +31,4 @@ class App : Application() {
         super.onCreate()
         _instance = this
     }
-
 }
