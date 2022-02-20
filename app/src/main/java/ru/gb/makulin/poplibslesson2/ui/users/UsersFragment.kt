@@ -11,13 +11,19 @@ import ru.gb.makulin.poplibslesson2.databinding.FragmentUsersBinding
 import ru.gb.makulin.poplibslesson2.domain.users.GithubUsersRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.network.ApiHolder
+import ru.gb.makulin.poplibslesson2.network.NetworkStatus
 import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
 import ru.gb.makulin.poplibslesson2.ui.users.adapter.UsersAdapter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        UsersPresenter(App.instance.router, GithubUsersRepository(ApiHolder.githubApi))
+        UsersPresenter(
+            App.instance.router, GithubUsersRepository(
+                ApiHolder.githubApi,
+                NetworkStatus(requireContext()), App.instance.database.userDao
+            )
+        )
     }
 
     private val adapter by lazy {
