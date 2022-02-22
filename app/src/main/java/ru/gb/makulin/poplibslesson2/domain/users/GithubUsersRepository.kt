@@ -14,14 +14,18 @@ class GithubUsersRepository(
     override fun getUsers(): Single<List<GithubUserDTO>> =
         networkStatus.isOnline().flatMap { isOnline ->
             if (isOnline) {
-                githubApi
-                    .getUsers()
-                    .flatMap {
-                        usersCache.saveCache(it)
-                        Single.just(it)
-                    }
+                getUsersOnline()
             } else {
-                usersCache.loadCache()
+                getUsersOffline()
             }
+        }
+
+    private fun getUsersOffline() = usersCache.loadCache()
+
+    private fun getUsersOnline() = githubApi
+        .getUsers()
+        .flatMap {
+            usersCache.saveCache(it)
+            Single.just(it)
         }
 }

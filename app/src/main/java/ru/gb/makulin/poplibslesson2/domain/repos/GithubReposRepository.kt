@@ -12,17 +12,24 @@ class GithubReposRepository(
     private val networkStatus: NetworkStatus,
     private val reposCache: IGithubReposCache
 ) : IGithubReposRepository {
+
     override fun getUserRepos(user: GithubUserModel): Single<List<GithubUserReposDTO>> =
         networkStatus.isOnline().flatMap { isOnline ->
             if (isOnline) {
-                githubApi
-                    .getUserRepos(user.login)
-                    .flatMap {
-                        reposCache.saveCache(it)
-                        Single.just(it)
-                    }
+                getUserReposOnline(user)
             } else {
-                reposCache.loadCache(user.id)
+                getUserReposOffline(user)
             }
         }
+
+    private fun getUserReposOffline(user: GithubUserModel) =
+        reposCache.loadCache(user.id)
+
+    private fun getUserReposOnline(user: GithubUserModel) =
+        githubApi
+            .getUserRepos(user.login)
+            .flatMap {
+                reposCache.saveCache(it)
+                Single.just(it)
+            }
 }
