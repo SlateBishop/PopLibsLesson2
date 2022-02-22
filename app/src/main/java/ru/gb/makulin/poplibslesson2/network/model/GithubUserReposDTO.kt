@@ -1,4 +1,4 @@
-package ru.gb.makulin.poplibslesson2.network
+package ru.gb.makulin.poplibslesson2.network.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -6,5 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GithubUserReposDTO(
     val name: String,
-    val fullName: String
+    val fullName: String,
+    val id: Long,
+    val owner: Owner
 ) : Parcelable

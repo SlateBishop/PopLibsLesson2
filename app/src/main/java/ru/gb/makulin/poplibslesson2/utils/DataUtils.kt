@@ -1,9 +1,12 @@
 package ru.gb.makulin.poplibslesson2.utils
 
+import ru.gb.makulin.poplibslesson2.database.entity.GithubUserEntity
+import ru.gb.makulin.poplibslesson2.database.entity.GithubUserReposEntity
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.model.GithubUserReposModel
-import ru.gb.makulin.poplibslesson2.network.GithubUserDTO
-import ru.gb.makulin.poplibslesson2.network.GithubUserReposDTO
+import ru.gb.makulin.poplibslesson2.network.model.GithubUserDTO
+import ru.gb.makulin.poplibslesson2.network.model.GithubUserReposDTO
+import ru.gb.makulin.poplibslesson2.network.model.Owner
 
 fun convertGithubUsersFromDtoToModel(githubUsersDTO: List<GithubUserDTO>): List<GithubUserModel> {
     return githubUsersDTO.map {
@@ -15,5 +18,36 @@ fun convertGithubUserReposFromDtoToModel(githubUserReposDTO: List<GithubUserRepo
         List<GithubUserReposModel> {
     return githubUserReposDTO.map {
         GithubUserReposModel(it.name, it.fullName)
+    }
+}
+
+fun convertGithubUsersFromDtoToEntity(userDTO: List<GithubUserDTO>): List<GithubUserEntity> {
+    return userDTO.map {
+        GithubUserEntity(it.id, it.login, it.avatarUrl)
+    }
+}
+
+fun convertGithubUsersFromEntityToDTO(usersEntity: List<GithubUserEntity>):
+        List<GithubUserDTO> {
+    return usersEntity.map {
+        GithubUserDTO(it.id, it.login, it.avatarUrl)
+    }
+}
+
+fun convertGithubUserReposFromDtoToEntity(repoDTO: List<GithubUserReposDTO>):
+        List<GithubUserReposEntity> {
+    return repoDTO.map {
+        with(it) {
+            GithubUserReposEntity(id, name, fullName, owner.id)
+        }
+    }
+}
+
+fun convertGithubUserReposFromEntityToDto(repoEntity: List<GithubUserReposEntity>):
+        List<GithubUserReposDTO> {
+    return repoEntity.map {
+        with(it) {
+            GithubUserReposDTO(name, fullName, id, Owner(userId))
+        }
     }
 }
