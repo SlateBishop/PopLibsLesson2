@@ -1,7 +1,6 @@
 package ru.gb.makulin.poplibslesson2.utils
 
 import ru.gb.makulin.poplibslesson2.database.entity.GithubUserEntity
-import ru.gb.makulin.poplibslesson2.database.entity.GithubUserReposEntity
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.model.GithubUserReposModel
 import ru.gb.makulin.poplibslesson2.network.model.GithubUserDTO

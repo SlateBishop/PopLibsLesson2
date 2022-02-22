@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
+import ru.gb.makulin.poplibslesson2.database.cache.RoomGithubUsersCache
 import ru.gb.makulin.poplibslesson2.databinding.FragmentUsersBinding
 import ru.gb.makulin.poplibslesson2.domain.users.GithubUsersRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
@@ -21,7 +22,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         UsersPresenter(
             App.instance.router, GithubUsersRepository(
                 ApiHolder.githubApi,
-                NetworkStatus(requireContext()), App.instance.database.userDao
+                NetworkStatus(requireContext()),
+                RoomGithubUsersCache(App.instance.database.userDao)
             )
         )
     }
