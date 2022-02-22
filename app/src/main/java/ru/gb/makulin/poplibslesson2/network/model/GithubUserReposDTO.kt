@@ -6,5 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GithubUserReposDTO(
     val name: String,
-    val fullName: String
+    val fullName: String,
+    val id: Long,
+    val owner: Owner
 ) : Parcelable
