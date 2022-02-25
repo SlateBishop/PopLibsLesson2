@@ -6,8 +6,9 @@ import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.network.GithubApi
 import ru.gb.makulin.poplibslesson2.network.NetworkStatus
 import ru.gb.makulin.poplibslesson2.network.model.GithubUserReposDTO
+import javax.inject.Inject
 
-class GithubReposRepository(
+class GithubReposRepository @Inject constructor(
     private val githubApi: GithubApi,
     private val networkStatus: NetworkStatus,
     private val reposCache: IGithubReposCache

@@ -4,6 +4,7 @@ import dagger.Component
 import ru.gb.makulin.poplibslesson2.di.modules.*
 import ru.gb.makulin.poplibslesson2.ui.main.MainActivity
 import ru.gb.makulin.poplibslesson2.ui.main.MainPresenter
+import ru.gb.makulin.poplibslesson2.ui.users.UsersPresenter
 import javax.inject.Singleton
 
 @Component(
@@ -20,5 +21,7 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
 
-    fun provideMainPresenter():MainPresenter
+    fun provideMainPresenter(): MainPresenter
+
+    fun provideUsersPresenter(): UsersPresenter
 }
