@@ -7,17 +7,17 @@ import ru.gb.makulin.poplibslesson2.ui.details.DetailsRepoFragment
 import ru.gb.makulin.poplibslesson2.ui.repos.UserReposFragment
 import ru.gb.makulin.poplibslesson2.ui.users.UsersFragment
 
-object AppScreens {
+class AppScreens : IScreens {
 
-    fun usersScreen() = FragmentScreen {
+    override fun usersScreen() = FragmentScreen {
         UsersFragment.newInstance()
     }
 
-    fun detailsUserScreen(repo: GithubUserReposModel) = FragmentScreen {
+    override fun detailsUserScreen(repo: GithubUserReposModel) = FragmentScreen {
         DetailsRepoFragment.newInstance(repo)
     }
 
-    fun reposScreen(user: GithubUserModel) = FragmentScreen {
+    override fun reposScreen(user: GithubUserModel) = FragmentScreen {
         UserReposFragment.newInstance(user)
     }
 }
