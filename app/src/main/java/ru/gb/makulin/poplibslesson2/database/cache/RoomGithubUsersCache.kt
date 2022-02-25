@@ -5,8 +5,9 @@ import ru.gb.makulin.poplibslesson2.database.dao.GithubUserDAO
 import ru.gb.makulin.poplibslesson2.network.model.GithubUserDTO
 import ru.gb.makulin.poplibslesson2.utils.convertGithubUsersFromDtoToEntity
 import ru.gb.makulin.poplibslesson2.utils.convertGithubUsersFromEntityToDTO
+import javax.inject.Inject
 
-class RoomGithubUsersCache(
+class RoomGithubUsersCache @Inject constructor(
     private val userDAO: GithubUserDAO
 ) : IGithubUsersCache {
 

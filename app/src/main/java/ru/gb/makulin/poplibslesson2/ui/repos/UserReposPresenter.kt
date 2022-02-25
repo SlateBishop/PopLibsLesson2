@@ -1,6 +1,8 @@
 package ru.gb.makulin.poplibslesson2.ui.repos
 
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
@@ -8,13 +10,15 @@ import ru.gb.makulin.poplibslesson2.domain.repos.IGithubReposRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.model.GithubUserReposModel
 import ru.gb.makulin.poplibslesson2.screens.AppScreens
+import ru.gb.makulin.poplibslesson2.screens.IScreens
 import ru.gb.makulin.poplibslesson2.utils.convertGithubUserReposFromDtoToModel
 
 
-class UserReposPresenter(
+class UserReposPresenter @AssistedInject constructor(
     private val router: Router,
     private val reposRepository: IGithubReposRepository,
-    private val userModel: GithubUserModel
+    private val screen: IScreens,
+    @Assisted private val userModel: GithubUserModel
 ) : MvpPresenter<UserReposView>() {
 
     override fun onFirstViewAttach() {
@@ -32,7 +36,7 @@ class UserReposPresenter(
     }
 
     fun onRepoClicked(repo: GithubUserReposModel) {
-        router.navigateTo(AppScreens.detailsUserScreen(repo))
+        router.navigateTo(screen.detailsUserScreen(repo))
     }
 
     fun backPressed(): Boolean {

@@ -4,21 +4,15 @@ import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 import ru.gb.makulin.poplibslesson2.database.GithubDatabase
+import ru.gb.makulin.poplibslesson2.di.components.DaggerAppComponent
+import ru.gb.makulin.poplibslesson2.di.modules.ContextModule
 
 class App : Application() {
 
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-
-    val navigatorHolder
-        get() = cicerone.getNavigatorHolder()
-
-    val router
-        get() = cicerone.router
-
-    val database by lazy {
-        GithubDatabase.getInstance(this)
+    val appComponent by lazy {
+        DaggerAppComponent.builder()
+            .contextModule(ContextModule(this))
+            .build()
     }
 
     companion object {

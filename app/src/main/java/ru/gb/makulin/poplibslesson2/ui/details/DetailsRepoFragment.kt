@@ -16,7 +16,7 @@ import ru.gb.makulin.poplibslesson2.utils.REPO_SAVE_KEY
 class DetailsRepoFragment : MvpAppCompatFragment(), DetailsRepoView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        DetailsRepoPresenter(App.instance.router)
+        App.instance.appComponent.provideDetailsPresenter()
     }
 
     private var _binding: FragmentDetailsUserBinding? = null

@@ -7,8 +7,9 @@ import android.net.NetworkRequest
 import androidx.core.content.getSystemService
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
+import javax.inject.Inject
 
-class NetworkStatus(context: Context) {
+class NetworkStatus @Inject constructor(context: Context) {
 
     private val connectivityManager = context.getSystemService<ConnectivityManager>()
     private val request = NetworkRequest.Builder().build()

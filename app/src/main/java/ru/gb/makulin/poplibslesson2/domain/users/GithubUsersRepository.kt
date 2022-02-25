@@ -5,8 +5,9 @@ import ru.gb.makulin.poplibslesson2.database.cache.IGithubUsersCache
 import ru.gb.makulin.poplibslesson2.network.GithubApi
 import ru.gb.makulin.poplibslesson2.network.NetworkStatus
 import ru.gb.makulin.poplibslesson2.network.model.GithubUserDTO
+import javax.inject.Inject
 
-class GithubUsersRepository(
+class GithubUsersRepository @Inject constructor(
     private val githubApi: GithubApi,
     private val networkStatus: NetworkStatus,
     private val usersCache: IGithubUsersCache
