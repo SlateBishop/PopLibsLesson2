@@ -3,11 +3,13 @@ package ru.gb.makulin.poplibslesson2.di.modules
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
+import dagger.Module
 import dagger.Provides
 import ru.gb.makulin.poplibslesson2.screens.AppScreens
 import ru.gb.makulin.poplibslesson2.screens.IScreens
 import javax.inject.Singleton
 
+@Module
 class NavigationModule {
 
     @Provides

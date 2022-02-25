@@ -2,13 +2,17 @@ package ru.gb.makulin.poplibslesson2.ui.main
 
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
-import ru.gb.makulin.poplibslesson2.screens.AppScreens
+import ru.gb.makulin.poplibslesson2.screens.IScreens
+import javax.inject.Inject
 
-class MainPresenter(private val router: Router) : MvpPresenter<MainView>() {
+class MainPresenter @Inject constructor(
+    private val router: Router,
+    private val screen: IScreens
+) : MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        router.replaceScreen(AppScreens.usersScreen())
+        router.replaceScreen(screen.usersScreen())
     }
 
     fun backPressed() {

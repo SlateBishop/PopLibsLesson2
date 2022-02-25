@@ -3,6 +3,7 @@ package ru.gb.makulin.poplibslesson2.di.components
 import dagger.Component
 import ru.gb.makulin.poplibslesson2.di.modules.*
 import ru.gb.makulin.poplibslesson2.ui.main.MainActivity
+import ru.gb.makulin.poplibslesson2.ui.main.MainPresenter
 import javax.inject.Singleton
 
 @Component(
@@ -19,5 +20,5 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
 
-
+    fun provideMainPresenter():MainPresenter
 }
