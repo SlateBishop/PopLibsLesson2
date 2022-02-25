@@ -2,6 +2,7 @@ package ru.gb.makulin.poplibslesson2.di.components
 
 import dagger.Component
 import ru.gb.makulin.poplibslesson2.di.modules.*
+import ru.gb.makulin.poplibslesson2.ui.details.DetailsRepoPresenter
 import ru.gb.makulin.poplibslesson2.ui.main.MainActivity
 import ru.gb.makulin.poplibslesson2.ui.main.MainPresenter
 import ru.gb.makulin.poplibslesson2.ui.repos.UserReposPresenterFactory
@@ -27,4 +28,6 @@ interface AppComponent {
     fun provideUsersPresenter(): UsersPresenter
 
     fun provideReposPresenterFactory(): UserReposPresenterFactory
+
+    fun provideDetailsPresenter(): DetailsRepoPresenter
 }
