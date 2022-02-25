@@ -8,13 +8,9 @@ import androidx.core.os.bundleOf
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.gb.makulin.poplibslesson2.App
-import ru.gb.makulin.poplibslesson2.database.cache.RoomGithubReposCache
 import ru.gb.makulin.poplibslesson2.databinding.FragmentReposBinding
-import ru.gb.makulin.poplibslesson2.domain.repos.GithubReposRepository
 import ru.gb.makulin.poplibslesson2.model.GithubUserModel
 import ru.gb.makulin.poplibslesson2.model.GithubUserReposModel
-import ru.gb.makulin.poplibslesson2.network.ApiHolder
-import ru.gb.makulin.poplibslesson2.network.NetworkStatus
 import ru.gb.makulin.poplibslesson2.ui.base.BackButtonListener
 import ru.gb.makulin.poplibslesson2.ui.repos.adapter.UserReposAdapter
 import ru.gb.makulin.poplibslesson2.utils.USER_SAVE_KEY
@@ -22,15 +18,7 @@ import ru.gb.makulin.poplibslesson2.utils.USER_SAVE_KEY
 class UserReposFragment : MvpAppCompatFragment(), UserReposView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        UserReposPresenter(
-            App.instance.router,
-            GithubReposRepository(
-                ApiHolder.githubApi,
-                NetworkStatus(requireContext()),
-                RoomGithubReposCache(App.instance.database.reposDao)
-            ),
-            userModel
-        )
+        App.instance.appComponent.provideReposPresenterFactory().presenter(userModel)
     }
 
     private val userModel by lazy {
